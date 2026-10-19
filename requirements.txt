@@ -1,0 +1,5 @@
+# 核心依赖（CLI / Agent）
+openai>=1.30          # 任何 OpenAI 兼容端点：DeepSeek / Kimi / GLM / 本地 vLLM
+
+# 可视化工作台（python app.py）
+gradio>=4.0

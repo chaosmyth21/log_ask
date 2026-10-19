@@ -1,0 +1,12 @@
+# 统一换行，避免 Windows / macOS 协作时整文件显示成"被修改"
+* text=auto eol=lf
+
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+
+# 二进制，不做换行转换
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.pdf  binary
+*.db   binary

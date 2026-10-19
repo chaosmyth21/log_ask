@@ -1,0 +1,27 @@
+__pycache__/
+*.py[cod]
+*.db
+*.db-journal
+
+# 本机配置（含 api_key），只提交模板
+labmemory.toml
+
+# 运行产物
+.labmemory/
+tests/_tmp/
+.env
+demo_out/
+runs/
+ingested.json
+weekly*.md
+reports/
+weekly/
+.idea/
+.DS_Store
+.venv/
+venv/
+.vscode/
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+.coverage

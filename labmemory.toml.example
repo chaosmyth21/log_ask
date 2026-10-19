@@ -1,0 +1,56 @@
+# LabMemory 配置文件
+# 复制成 labmemory.toml 再改：  python main.py config --init
+# 优先级：这里的值 < 环境变量(LM_*) < 命令行参数
+# 注意：labmemory.toml 已在 .gitignore 里，填了 key 也不会被提交。
+
+[llm]
+# 必填。去服务商控制台申请
+api_key = ""
+# DeepSeek: https://api.deepseek.com/v1
+# Kimi:     https://api.moonshot.cn/v1
+# 智谱GLM:  https://open.bigmodel.cn/api/paas/v4
+base_url = "https://api.deepseek.com/v1"
+# DeepSeek: deepseek-chat / Kimi: kimi-k3 / GLM: glm-4-plus
+model = "deepseek-chat"
+temperature = 0.2
+timeout = 60
+# true = 强制规则策略（不调模型，断网也能跑）
+offline = false
+
+[paths]
+# APP 右上角齿轮会从这个目录下列出 test1 / test2 等子文件夹供切换。
+# 模拟数据生成器会把第一份数据放进 logs/test1，第二份放进 logs/test2。
+logs_root = "./demo_data/logs"
+# CLI 直接使用这个目录；APP 会按齿轮里的选择读取 logs_root/<所选文件夹>。
+# 默认指向模拟数据生成程序第一次生成的实验数据目录：python demo/make_demo_data.py
+data_dir = "./demo_data/logs/test1"
+# SQLite 库位置。相对路径按当前工作目录解析
+db = "labmemory.db"
+
+[agent]
+# 摄录一次最多几轮模型交互（文件多就调大）
+max_turns_ingest = 20
+# 一次问答最多几轮
+max_turns_query = 10
+# 总工具调用上限
+max_calls = 40
+# 单次工具结果截断字符数（日志行很长时调大）
+max_result_chars = 5000
+
+[scan]
+# 只看多少小时内的改动。首次全量导入可以给个大数，如 87600
+hours = 72
+
+[watch]
+# 文件多久不变才算写完（秒）
+settle = 2.0
+# 攒批窗口：把同一次运行产生的多个文件合并（秒）
+batch_window = 6.0
+# 轮询间隔（没装 watchdog 时生效）
+interval = 1.5
+# 0 = 常驻监听；>0 = 跑这么多秒后退出
+duration = 0
+
+[capture]
+# 解释器钩子（IDE 里按 F5 也记录）是否采集。项目里没有 .labmemory/ 时本来就不会触发
+enabled = true
